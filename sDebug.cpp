@@ -91,7 +91,7 @@ namespace sDebug
 	 */
 	void __dummy(...)
 	{
-
+		// This function must be empty
 	}
 
 	/**
