@@ -6,6 +6,7 @@
                 "${workspaceFolder}/**"
             ],
             "defines": [
+				"sDEBUG",
 				"sDEBUG_VERBOSE",
 				"sDEBUG_INFO",
 				"sDEBUG_ERROR"
