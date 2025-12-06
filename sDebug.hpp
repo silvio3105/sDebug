@@ -80,7 +80,9 @@ namespace sDebug
 	 */	
 	inline void __output(const char* string, const uint16_t len)
 	{
+		#ifdef sDEBUG
 		out(string, len);
+		#endif // sDEBUG
 	}
 
 	/**
@@ -94,7 +96,9 @@ namespace sDebug
 	 */
 	inline void __output(const char* string)
 	{
+		#ifdef sDEBUG
 		__output(string, strlen(string));
+		#endif // sDEBUG
 	}
 
 	/**

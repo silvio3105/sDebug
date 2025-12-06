@@ -62,6 +62,8 @@ namespace sDebug
 	 */
 	void __outputf(const char* string, ...)
 	{
+		#ifdef sDEBUG
+
 		#ifdef sDEBUG_STACK_PRINTF
 		char buffer[DEBUG_BUFFER_SIZE];
 		#else
@@ -73,6 +75,8 @@ namespace sDebug
 		uint16_t len = vsnprintf(buffer, sizeof(buffer), string, args);
 		__output(buffer, len);
 		va_end(args);
+
+		#endif // sDEBUG
 	}
 
 	/**
