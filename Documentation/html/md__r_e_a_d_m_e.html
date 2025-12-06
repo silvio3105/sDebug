@@ -26,7 +26,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">sDebug<span id="projectnumber">&#160;v1.0rc1</span>
+   <div id="projectname">sDebug<span id="projectnumber">&#160;v1.0rc2</span>
    </div>
    <div id="projectbrief">Simple Debug library written in C++.</div>
   </td>
@@ -94,7 +94,7 @@ $(document).ready(function(){initNavTree('md__r_e_a_d_m_e.html',''); initResizab
   <div class="headertitle"><div class="title">About</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md0"></a> Simple Debug library is frameworkless library written in C++. It provides three debug levels - verbose, info and error levels. Each level can be enabled or disabled during compile. User have to redefine output function and provide support for string output(RTT, UART etc...). The library is encapsulated in <code><a class="el" href="namespaces_debug.html" title="Debug namespace.">sDebug</a></code> namespace. Examples can be found in <code>Examples</code> folder.</p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md0"></a> Simple Debug library is frameworkless library written in C++. It provides three debug levels - verbose, info and error. Each level can be enabled or disabled during compile time. User have to redefine output function in application layer. The library is encapsulated in <code><a class="el" href="namespaces_debug.html" title="Simple Debug namespace.">sDebug</a></code> namespace. Examples can be found in <code>Examples</code> folder.</p>
 <h2><a class="anchor" id="autotoc_md1"></a>
 Levels</h2>
 <p>Library supports three debug levels:</p><ul>
@@ -105,30 +105,30 @@ Levels</h2>
 <p>It is possible to enable each level.</p>
 <h1><a class="anchor" id="autotoc_md2"></a>
 Usage</h1>
-<p>Include <code><a class="el" href="s_debug_8hpp.html" title="Simple Debug library header file.">sDebug.hpp</a></code> in each file where debug is needed. Inside <code>Main.cpp</code> redefine function <code>void <a class="el" href="namespaces_debug.html#a913ae1ed9f92780fe36d7a70073f0270" title="Output function. User should redefine this function in the project.">sDebug::out(const char* string, const uint16_t len)</a></code> and pass <code>string</code> and <code>len</code> to function for final print(RTT, UART etc...).</p>
+<p>Include <code><a class="el" href="s_debug_8hpp.html" title="Simple Debug library header file.">sDebug.hpp</a></code> in each file where debug is needed. Inside <code>Main.cpp</code> redefine function <code>void <a class="el" href="namespaces_debug.html#ac3d8e5a5e414148b6e4ec4d64b346858" title="Output function. User should redefine this function in the project.">sDebug::out(const char* string, const uint16_t len)</a></code> and pass <code>string</code> and <code>len</code> to function for final print(eg., RTT, UART etc...).</p>
 <h3><a class="anchor" id="autotoc_md3"></a>
 Compile flags</h3>
 <ul>
-<li><code>DEBUG</code>: Enable debug prints for whole project. This flag is "main switch" for the library and debug prints.</li>
-<li><code>DEBUG_VERBOSE</code>: Enable verbose debug level for whole project. Does not enable info or error levels.</li>
-<li><code>DEBUG_INFO</code>: Enable info debug level for whole project. Does not enable error level.</li>
-<li><code>DEBUG_ERROR</code>: Enable error debug level for whole project.</li>
-<li><code>DEBUG_BUFFER_SIZE={n}</code>: Set buffer size to <code>n</code> bytes for printf function. If not provided, buffer size will be set to 128 bytes.</li>
-<li><code>DEBUG_STACK_PRINTF</code>: Use buffer on stack for printf function.</li>
+<li><code>sDEBUG</code>: Enable debug prints for whole project. This flag is "main switch" all debug prints.</li>
+<li><code>sDEBUG_VERBOSE</code>: Enable verbose debug level for whole project. Does not enable info or error levels.</li>
+<li><code>sDEBUG_INFO</code>: Enable info debug level for whole project. Does not enable error level.</li>
+<li><code>sDEBUG_ERROR</code>: Enable error debug level for whole project.</li>
+<li><code>sDEBUG_BUFFER_SIZE={n}</code>: Set printf buffer size to <code>n</code> bytes. If not provided, buffer size will be set to default value.</li>
+<li><code>sDEBUG_STACK_PRINTF</code>: Use buffer on stack for printf function.</li>
 </ul>
 <h3><a class="anchor" id="autotoc_md4"></a>
 Enable/Disable debug</h3>
 <p>Enable debug levels with snippets:</p><ul>
-<li><code>DEBUG_ENABLE_VERBOSE({module})</code>: Enable verbose debug level for <code>module</code>(eg., ILPS22QS).</li>
-<li><code>DEBUG_ENABLE_INFO({module})</code>: Enable info debug level for <code>module</code>(eg., ILPS22QS).</li>
-<li><code>DEBUG_ENABLE_ERROR({module})</code>: Enable error debug level for <code>module</code>(eg., ILPS22QS).</li>
+<li><code>sDEBUG_ENABLE_VERBOSE({module})</code>: Enable verbose debug level for <code>module</code>(eg., ILPS22QS).</li>
+<li><code>sDEBUG_ENABLE_INFO({module})</code>: Enable info debug level for <code>module</code>(eg., ILPS22QS).</li>
+<li><code>sDEBUG_ENABLE_ERROR({module})</code>: Enable error debug level for <code>module</code>(eg., ILPS22QS).</li>
 </ul>
 <p>Those snippets will create static function aliases for each debug level. Disable debug levels with snippets:</p><ul>
-<li><code>DEBUG_DISABLE_VERBOSE({module})</code>: Disable verbose debug level for <code>module</code>(eg., ILPS22QS).</li>
-<li><code>DEBUG_DISABLE_INFO({module})</code>: Disable info debug level for <code>module</code>(eg., ILPS22QS).</li>
-<li><code>DEBUG_DISABLE_ERROR({module})</code>: Disable error debug level for <code>module</code>(eg., ILPS22QS).</li>
+<li><code>sDEBUG_DISABLE_VERBOSE({module})</code>: Disable verbose debug level for <code>module</code>(eg., ILPS22QS).</li>
+<li><code>sDEBUG_DISABLE_INFO({module})</code>: Disable info debug level for <code>module</code>(eg., ILPS22QS).</li>
+<li><code>sDEBUG_DISABLE_ERROR({module})</code>: Disable error debug level for <code>module</code>(eg., ILPS22QS).</li>
 </ul>
-<p>When debug level is disabled prints for disabled level are redirected to dummy function and strings are removed by compiler.</p>
+<p>When debug level is disabled, prints for disabled level are redirected to dummy function and removed later in compile/build process.</p>
 <h3><a class="anchor" id="autotoc_md5"></a>
 Print functions</h3>
 <p>Library provides three functions for each debug level:</p><ul>
@@ -136,7 +136,7 @@ Print functions</h3>
 <li><code>_PRINTN</code>: For constant strings with string length - <code>_PRINTN("String\n", 7);</code></li>
 <li><code>_PRINTF</code>: For formatted strings - <code>_PRINTF("String %u\n", 10);</code></li>
 </ul>
-<p>Function format is <code>{module}_PRINT(N/F){_level}</code> where <code>module</code> is provided with <code>DEBUG_ENABLE</code>. For example, if all levels are enabled for <code>ILPS22QS</code> module, then functions will be:</p><ul>
+<p>Function format is <code>{module}_PRINT(N/F){_level}</code> where <code>module</code> is provided with <code>sDEBUG_ENABLE</code>. For example, if all levels are enabled for <code>ILPS22QS</code> module, then functions will be:</p><ul>
 <li>For verbose level: <code>ILPS22QS_PRINT</code>, <code>ILPS22QS_PRINTN</code> and <code>ILPS22QS_PRINTF</code>.</li>
 <li>For info level: <code>ILPS22QS_PRINT_INFO</code>, <code>ILPS22QS_PRINTN_INFO</code> and <code>ILPS22QS_PRINTF_INFO</code>.</li>
 <li>For error level: <code>ILPS22QS_PRINT_ERROR</code>, <code>ILPS22QS_PRINTN_ERROR</code> and <code>ILPS22QS_PRINTF_ERROR</code>.</li>
@@ -158,7 +158,7 @@ LICENSE</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Mar 9 2025 22:11:59 for sDebug by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sat Dec 6 2025 01:37:56 for sDebug by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

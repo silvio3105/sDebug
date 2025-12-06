@@ -48,7 +48,7 @@ PROJECT_NAME           = sDebug
 # could be handy for archiving the generated documentation or if some version
 # control system is used.
 
-PROJECT_NUMBER         = v1.0rc1
+PROJECT_NUMBER         = v1.0rc2
 
 # Using the PROJECT_BRIEF tag one can provide an optional one line description
 # for a project that appears at the top of each page and should give viewer a
@@ -2433,10 +2433,10 @@ INCLUDE_FILE_PATTERNS  =
 # This tag requires that the tag ENABLE_PREPROCESSING is set to YES.
 
 PREDEFINED             = __cplusplus \
-                         DEBUG \
-                         DEBUG_VERBOSE \
-                         DEBUG_INFO \
-                         DEBUG_ERROR
+                         sDEBUG \
+                         sDEBUG_VERBOSE \
+                         sDEBUG_INFO \
+                         sDEBUG_ERROR
 
 # If the MACRO_EXPANSION and EXPAND_ONLY_PREDEF tags are set to YES then this
 # tag can be used to specify a list of macro names that should be expanded. The

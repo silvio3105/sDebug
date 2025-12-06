@@ -2,6 +2,6 @@
 <area shape="rect" id="Node000001" title="Output verbose prints." alt="" coords="5,5,125,31"/>
 <area shape="rect" id="Node000002" href="$group__s_debug.html#gaa5fa520d02dd980126fc864bceccb62d" title="Output constant debug string." alt="" coords="173,5,296,31"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="125,16,157,16,157,21,125,21"/>
-<area shape="rect" id="Node000003" href="$namespaces_debug.html#a913ae1ed9f92780fe36d7a70073f0270" title="Output function. User should redefine this function in the project." alt="" coords="344,5,435,31"/>
+<area shape="rect" id="Node000003" href="$namespaces_debug.html#ac3d8e5a5e414148b6e4ec4d64b346858" title="Output function. User should redefine this function in the project." alt="" coords="344,5,435,31"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="296,16,329,16,329,21,296,21"/>
 </map>
