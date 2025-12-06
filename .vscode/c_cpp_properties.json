@@ -6,10 +6,9 @@
                 "${workspaceFolder}/**"
             ],
             "defines": [
-				"DEBUG",
-				"DEBUG_VERBOSE",
-				"DEBUG_INFO",
-				"DEBUG_ERROR"
+				"sDEBUG_VERBOSE",
+				"sDEBUG_INFO",
+				"sDEBUG_ERROR"
             ],
             "cStandard": "c17",
             "cppStandard": "c++17",

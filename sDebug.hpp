@@ -31,39 +31,43 @@
 
 
 // ----- DEFINES
-#ifdef DEBUG_VERBOSE
+#ifdef sDEBUG_VERBOSE
 #define sDEBUG_VERBOSE_OUTPUTF	sDebug::__outputf
 #else
 #define sDEBUG_VERBOSE_OUTPUTF	sDebug::__dummy
-#endif // DEBUG_VERBOSE
+#endif // sDEBUG_VERBOSE
 
-#ifdef DEBUG_INFO
+#ifdef sDEBUG_INFO
 #define sDEBUG_INFO_OUTPUTF	sDebug::__outputf
 #else
 #define sDEBUG_INFO_OUTPUTF	sDebug::__dummy
-#endif // DEBUG_INFO
+#endif // sDEBUG_INFO
 
-#ifdef DEBUG_ERROR
+#ifdef sDEBUG_ERROR
 #define sDEBUG_ERROR_OUTPUTF	sDebug::__outputf
 #else
 #define sDEBUG_ERROR_OUTPUTF	sDebug::__dummy
-#endif // DEBUG_ERROR
+#endif // sDEBUG_ERROR
 
 
 // ----- NAMESPACES
 namespace sDebug
 {
-	// ----- VARIABLES
+	// VARIABLES
 	/**
 	 * @brief Library version string.
 	 * 
 	 * \ingroup sDebug
 	 */
-	static constexpr char version[] = "v1.0rc1";
+	static constexpr char version[] = "v1.0rc2";
 
-	// ----- FUNCTION DECLARATIONS & DEFINITIONS
-	__weak_symbol void out(const char* string, const uint16_t len);
 
+	// FUNCTION DECLARATIONS
+	void __outputf(const char* string, ...);
+	void out(const char* string, const uint16_t len);
+
+
+	// FUNCTION DEFINITIONS
 	/**
 	 * @brief Output constant debug string.
 	 * 
@@ -76,9 +80,7 @@ namespace sDebug
 	 */	
 	inline void __output(const char* string, const uint16_t len)
 	{
-		#ifdef DEBUG
 		out(string, len);
-		#endif // DEBUG
 	}
 
 	/**
@@ -92,13 +94,20 @@ namespace sDebug
 	 */
 	inline void __output(const char* string)
 	{
-		#ifdef DEBUG
 		__output(string, strlen(string));
-		#endif // DEBUG
 	}
 
-	void __outputf(const char* string, ...);
-	void __dummy(...);
+	/**
+	 * @brief Dummy function used when debug level is disabled.
+	 * 
+	 * @return No return value.
+	 * 
+	 * \ingroup sDebug
+	 */	
+	static inline constexpr void __dummy(...)
+	{
+
+	}
 
 	/**
 	 * @brief Output verbose prints.
@@ -113,16 +122,16 @@ namespace sDebug
 	 */	
 	inline void verbose(const char* string, const uint16_t len)
 	{
-		#ifdef DEBUG_VERBOSE
+		#ifdef sDEBUG_VERBOSE
 		__output(string, len);
-		#endif // DEBUG_VERBOSE
+		#endif // sDEBUG_VERBOSE
 	}
 
 	inline void verbose(const char* string)
 	{
-		#ifdef DEBUG_VERBOSE
+		#ifdef sDEBUG_VERBOSE
 		__output(string, strlen(string));
-		#endif // DEBUG_VERBOSE
+		#endif // sDEBUG_VERBOSE
 	}
 
 	/** @} */
@@ -140,16 +149,16 @@ namespace sDebug
 	 */	
 	inline void info(const char* string, const uint16_t len)
 	{
-		#ifdef DEBUG_INFO
+		#ifdef sDEBUG_INFO
 		__output(string, len);
-		#endif // DEBUG_INFO
+		#endif // sDEBUG_INFO
 	}
 
 	inline void info(const char* string)
 	{
-		#ifdef DEBUG_INFO
+		#ifdef sDEBUG_INFO
 		__output(string, strlen(string));
-		#endif // DEBUG_INFO
+		#endif // sDEBUG_INFO
 	}
 
 	/** @} */
@@ -167,16 +176,16 @@ namespace sDebug
 	 */	
 	inline void error(const char* string, const uint16_t len)
 	{
-		#ifdef DEBUG_ERROR
+		#ifdef sDEBUG_ERROR
 		__output(string, len);
-		#endif // DEBUG_ERROR
+		#endif // sDEBUG_ERROR
 	}
 
 	inline void error(const char* string)
 	{
-		#ifdef DEBUG_ERROR
+		#ifdef sDEBUG_ERROR
 		__output(string, strlen(string));
-		#endif // DEBUG_ERROR
+		#endif // sDEBUG_ERROR
 	}
 	
 	/** @} */
@@ -191,7 +200,7 @@ namespace sDebug
  * 
  * \ingroup sDebug
  */
-#define DEBUG_ENABLE_VERBOSE(_module) \
+#define sDEBUG_ENABLE_VERBOSE(_module) \
 	static const auto& _module ## _PRINTN = static_cast<void(*)(const char*, const uint16_t)>(sDebug::verbose); \
 	static const auto& _module ## _PRINT = static_cast<void(*)(const char*)>(sDebug::verbose); \
 	static constexpr auto& _module ## _PRINTF = sDEBUG_VERBOSE_OUTPUTF;
@@ -203,7 +212,7 @@ namespace sDebug
  * 
  * \ingroup sDebug
  */
-#define DEBUG_ENABLE_INFO(_module) \
+#define sDEBUG_ENABLE_INFO(_module) \
 	static const auto& _module ## _PRINTN_INFO = static_cast<void(*)(const char*, const uint16_t)>(sDebug::info); \
 	static const auto& _module ## _PRINT_INFO = static_cast<void(*)(const char*)>(sDebug::info); \
 	static constexpr auto& _module ## _PRINTF_INFO = sDEBUG_INFO_OUTPUTF;	
@@ -215,7 +224,7 @@ namespace sDebug
  * 
  * \ingroup sDebug
  */
-#define DEBUG_ENABLE_ERROR(_module) \
+#define sDEBUG_ENABLE_ERROR(_module) \
 	static const auto& _module ## _PRINTN_ERROR = static_cast<void(*)(const char*, const uint16_t)>(sDebug::error); \
 	static const auto& _module ## _PRINT_ERROR = static_cast<void(*)(const char*)>(sDebug::error); \
 	static constexpr auto& _module ## _PRINTF_ERROR = sDEBUG_ERROR_OUTPUTF;
@@ -227,7 +236,7 @@ namespace sDebug
  * 
  * \ingroup sDebug
  */
-#define DEBUG_DISABLE_VERBOSE(_module) \
+#define sDEBUG_DISABLE_VERBOSE(_module) \
 	static constexpr auto& _module ## _PRINTN = sDebug::__dummy; \
 	static constexpr auto& _module ## _PRINT = sDebug::__dummy; \
 	static constexpr auto& _module ## _PRINTF = sDebug::__dummy;	
@@ -239,7 +248,7 @@ namespace sDebug
  * 
  * \ingroup sDebug
  */
-#define DEBUG_DISABLE_INFO(_module) \
+#define sDEBUG_DISABLE_INFO(_module) \
 	static constexpr auto& _module ## _PRINTN_INFO = sDebug::__dummy; \
 	static constexpr auto& _module ## _PRINT_INFO = sDebug::__dummy; \
 	static constexpr auto& _module ## _PRINTF_INFO = sDebug::__dummy;	
@@ -251,7 +260,7 @@ namespace sDebug
  * 
  * \ingroup sDebug
  */
-#define DEBUG_DISABLE_ERROR(_module) \
+#define sDEBUG_DISABLE_ERROR(_module) \
 	static constexpr auto& _module ## _PRINTN_ERROR = sDebug::__dummy; \
 	static constexpr auto& _module ## _PRINT_ERROR = sDebug::__dummy; \
 	static constexpr auto& _module ## _PRINTF_ERROR = sDebug::__dummy;	

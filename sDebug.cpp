@@ -39,19 +39,19 @@
 
 
 // ----- DEFINES
-#ifndef DEBUG_BUFFER_SIZE
-#define DEBUG_BUFFER_SIZE					128 /**< @brief Buffer size in bytes for formatted strings. */
-#endif // DEBUG_BUFFER_SIZE
+#ifndef sDEBUG_BUFFER_SIZE
+#define sDEBUG_BUFFER_SIZE					128 /**< @brief Buffer size in bytes for formatted strings. */
+#endif // sDEBUG_BUFFER_SIZE
 
 
 // ----- NAMESPACES
 /**
- * @brief Debug namespace.
+ * @brief Simple Debug namespace.
  * 
  */
 namespace sDebug
 {
-	// ----- FUNCTION DEFINITIONS
+	// FUNCTION DEFINITIONS
 	/**
 	 * @brief Output formatted string.
 	 * 
@@ -62,36 +62,17 @@ namespace sDebug
 	 */
 	void __outputf(const char* string, ...)
 	{
-		#ifdef DEBUG
-
-		#ifdef DEBUG_STACK_PRINTF
+		#ifdef sDEBUG_STACK_PRINTF
 		char buffer[DEBUG_BUFFER_SIZE];
 		#else
-		static char buffer[DEBUG_BUFFER_SIZE];
-		#endif // DEBUG_STACK_PRINTF
+		static char buffer[sDEBUG_BUFFER_SIZE];
+		#endif // sDEBUG_STACK_PRINTF
 
 		va_list args;
 		va_start(args, string);
 		uint16_t len = vsnprintf(buffer, sizeof(buffer), string, args);
 		__output(buffer, len);
 		va_end(args);
-
-		// Prevent warning if no debug level is enabled
-		#if !defined(DEBUG_VERBOSE) && !defined(DEBUG_INFO) && !defined(DEBUG_ERROR)
-		(void)len;
-		#endif 
-
-		#endif // DEBUG
-	}
-
-	/**
-	 * @brief Dummy function used when debug level is disabled.
-	 * 
-	 * @return No return value.
-	 */
-	void __dummy(...)
-	{
-		// This function must be empty
 	}
 
 	/**
